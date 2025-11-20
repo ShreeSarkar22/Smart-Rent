@@ -4,13 +4,20 @@ A Decentralized Application (DApp) that automates rental agreements and payments
 
 ---
 
+## Group 1
+
+- Pranshu Suman , 2023A7PS1107H
+- Aarush Kanipakam , 2023A7PS1160H
+- Himnish Lalchandani , 2023AAPS1131H
+- Shree Suswaagatam Sarkar , 2023A3PS0345H
+- Divyajot Singh , 2023AAPS0253H
+
 ##  Features
 
 - **Smart Agreement Creation:** Landlords can create digital lease agreements backed by PDF documents stored on IPFS (via Pinata).
 - **Secure Fund Locking:** Tenants pay the full rent upfront, which is locked securely in the Smart Contract.
 - **Time-Based Release:** Rent is not paid to the landlord immediately. It is released automatically (via user trigger) only after specific time intervals pass.
 - **Live Financial Dashboard:** Real-time tracking of Total Contract Value, Amount Paid, and Amount Remaining.
-- **Countdown Timer:** Visual timer showing exactly when the next rent installment can be released.
 - **Lease Expiry & Reset:** Automated checks for lease duration. Landlords can reset the contract for a new tenant once the duration is over.
 - **No Middlemen:** Direct peer-to-peer interaction using MetaMask.
 

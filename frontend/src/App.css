@@ -137,3 +137,73 @@ h3 {
   font-weight: 500;
   text-align: center;
 }
+
+.App {
+  background: #ffffff;
+  width: 100%;
+  max-width: 550px;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.sub-text { font-size: 0.8rem; color: #888; }
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.stat-box {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+}
+.stat-box label { display: block; font-size: 0.7rem; color: #666; text-transform: uppercase; }
+.stat-box span { display: block; font-weight: bold; font-size: 0.9rem; color: #333; }
+.stat-box.paid span { color: #27ae60; }
+.stat-box.left span { color: #e74c3c; }
+
+/* Timer */
+.timer-box {
+  background: #eef2f7;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #d1d9e6;
+}
+.countdown {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #4a90e2;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Buttons */
+.release-btn { background-color: #8e44ad; }
+.release-btn:hover { background-color: #732d91; }
+
+.reset-btn { background-color: #34495e; margin-top: 10px;}
+.reset-btn:hover { background-color: #2c3e50; }
+
+.status-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.status-pill {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: white;
+}
+.status-pill.active { background: #27ae60; }
+.status-pill.expired { background: #e74c3c; }

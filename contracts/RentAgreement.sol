@@ -5,10 +5,10 @@ contract RentAgreement {
     struct Agreement {
         address payable landlord;
         address tenant;
-        string ipfsHash; // PDF Agreement
-        uint256 duration; // Total duration in seconds
-        uint256 interval; // Payment interval in seconds
-        uint256 rentPerInterval; // Amount in Wei
+        string ipfsHash;
+        uint256 duration;
+        uint256 interval;
+        uint256 rentPerInterval;
         uint256 startTime;
         uint256 totalRentPaid;
         bool active;
@@ -20,7 +20,7 @@ contract RentAgreement {
     event AgreementCreated(address landlord, address tenant);
     event RentPaid(address tenant, uint256 amount);
     event RentReleased(address landlord, uint256 amount);
-    event AgreementEnded();
+    event AgreementReset();
 
     constructor() {}
 
@@ -49,7 +49,6 @@ contract RentAgreement {
         emit AgreementCreated(msg.sender, _tenant);
     }
 
-    // Tenant pays the full amount upfront
     function fundAgreement() external payable {
         require(msg.sender == agreement.tenant, "Only tenant can fund");
         require(!agreement.fullyPaidByTenant, "Already funded");
@@ -65,23 +64,26 @@ contract RentAgreement {
         emit RentPaid(msg.sender, msg.value);
     }
 
-    // Can be called by anyone to release funds if due
     function releaseRent() external {
         require(agreement.active, "Agreement not active");
         require(agreement.fullyPaidByTenant, "Tenant has not paid yet");
-        require(block.timestamp < agreement.startTime + agreement.duration + agreement.interval, "Duration Over");
 
-        // Calculate how many intervals have passed since start
-        uint256 timeElapsed = block.timestamp - agreement.startTime;
-        uint256 intervalsPassed = timeElapsed / agreement.interval;
-        
-        // Calculate how much should have been paid by now
-        uint256 amountDue = intervalsPassed * agreement.rentPerInterval;
-        
-        // Calculate how much is remaining to be paid to landlord
+        uint256 totalContractValue = (agreement.duration / agreement.interval) * agreement.rentPerInterval;
+        uint256 amountDue;
+
+        // FIX: If duration is over, the AMOUNT DUE is the TOTAL CONTRACT VALUE.
+        if (block.timestamp >= agreement.startTime + agreement.duration) {
+            amountDue = totalContractValue;
+        } else {
+            // Normal calculation
+            uint256 timeElapsed = block.timestamp - agreement.startTime;
+            uint256 intervalsPassed = timeElapsed / agreement.interval;
+            amountDue = intervalsPassed * agreement.rentPerInterval;
+        }
+
         uint256 amountToRelease = amountDue - agreement.totalRentPaid;
 
-        require(amountToRelease > 0, "No rent due yet");
+        require(amountToRelease > 0, "No rent due yet or already fully paid");
         require(address(this).balance >= amountToRelease, "Insufficient contract balance");
 
         agreement.totalRentPaid += amountToRelease;
@@ -95,7 +97,16 @@ contract RentAgreement {
         return block.timestamp >= agreement.startTime + agreement.duration;
     }
     
-    function getContractBalance() external view returns (uint256) {
-        return address(this).balance;
+    function resetAgreement() external {
+        require(msg.sender == agreement.landlord, "Only Landlord");
+        require(block.timestamp >= agreement.startTime + agreement.duration, "Duration not over yet");
+        
+        // Safety: Ensure landlord gets everything before deleting
+        if (address(this).balance > 0) {
+            payable(msg.sender).transfer(address(this).balance);
+        }
+
+        delete agreement;
+        emit AgreementReset();
     }
 }
