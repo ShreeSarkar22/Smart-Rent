@@ -112,10 +112,10 @@ Since the blockchain runs locally, configure MetaMask manually:
 
 ### Add Network:
 
-`Network Name: Localhost 8545`
-`RPC URL: http://127.0.0.1:8545` 
-`Chain ID: 31337 (or 1337)` 
-`Currency Symbol: ETH`
+-Network Name: `Localhost 8545`
+-RPC URL: `http://127.0.0.1:8545` 
+-Chain ID: `31337` 
+-Currency Symbol: `ETH`
 
 ### Import Accounts:
 
