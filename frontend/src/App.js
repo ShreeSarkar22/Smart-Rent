@@ -5,12 +5,11 @@ import axios from "axios";
 import RentAgreementArtifact from "./artifacts/contracts/RentAgreement.sol/RentAgreement.json";
 import "./App.css";
 
-// NOTE: Update this after deploying to localhost or Sepolia
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; 
+const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; //  Update after deploying
 const PINATA_JWT = process.env.REACT_APP_PINATA_JWT;
 
 function App() {
-  // Removed unused provider/signer states to fix "assigned but never used" errors
+  // Removed unused provider/signer states
   const [contract, setContract] = useState(null);
   const [account, setAccount] = useState("");
   const [isLandlord, setIsLandlord] = useState(false);
@@ -26,7 +25,7 @@ function App() {
   const [agreementDetails, setAgreementDetails] = useState(null);
   const [statusMessage, setStatusMessage] = useState("");
 
-  // 1. Connect Wallet on Load
+  // Connect Wallet on Load
   useEffect(() => {
     const connectWallet = async () => {
       if (window.ethereum) {
@@ -55,7 +54,6 @@ function App() {
     };
 
     connectWallet();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); 
 
   // 2. Automation Loop
@@ -68,7 +66,6 @@ function App() {
           setStatusMessage("Duration of stay is over for the tenant.");
           return;
         }
-        // Just logging for automation simulation
         console.log("Checking system status...");
       } catch (err) {
         console.log("Rent not due yet or error checking");
@@ -82,7 +79,6 @@ function App() {
     }, 5000);
 
     return () => clearInterval(intervalId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contract, agreementDetails]);
 
   const fetchAgreementDetails = async (_contract, _account) => {
@@ -95,9 +91,9 @@ function App() {
           tenant: details.tenant,
           active: details.active,
           fullyPaidByTenant: details.fullyPaidByTenant,
-          duration: details.duration,           // Add this
-          interval: details.interval,           // Add this
-          rentPerInterval: details.rentPerInterval // Add this
+          duration: details.duration,
+          interval: details.interval,          
+          rentPerInterval: details.rentPerInterval
         });
         
         if (_account.toLowerCase() === details.landlord.toLowerCase()) {
@@ -168,8 +164,7 @@ function App() {
       const intervalBig = agreementDetails.interval;
       const rentPerIntervalBig = agreementDetails.rentPerInterval;
 
-      // Calculate Total: (Duration / Interval) * RentPerInterval
-      // Note: In Solidity 60/10 = 6. 
+      // Calculate Total: (Duration / Interval) * RentPerInterval 
       const totalIntervals = durationBig / intervalBig; 
       const totalWei = rentPerIntervalBig * totalIntervals;
 

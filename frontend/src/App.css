@@ -2,7 +2,7 @@
 .App {
   background: #ffffff;
   width: 100%;
-  max-width: 500px; /* Keeps it looking like a mobile/card app */
+  max-width: 500px; 
   padding: 2rem;
   border-radius: 16px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
@@ -70,7 +70,7 @@ input[type="file"] {
 button {
   width: 100%;
   padding: 12px;
-  background-color: #4a90e2; /* Nice Blue */
+  background-color: #4a90e2;
   color: white;
   border: none;
   border-radius: 8px;
@@ -91,7 +91,7 @@ button:active {
 
 /* Special Button for Tenant Payment */
 .pay-btn {
-  background-color: #27ae60; /* Green */
+  background-color: #27ae60; 
 }
 
 .pay-btn:hover {

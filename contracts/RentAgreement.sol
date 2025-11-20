@@ -65,7 +65,7 @@ contract RentAgreement {
         emit RentPaid(msg.sender, msg.value);
     }
 
-    // Can be called by anyone (or automated frontend) to release funds if due
+    // Can be called by anyone to release funds if due
     function releaseRent() external {
         require(agreement.active, "Agreement not active");
         require(agreement.fullyPaidByTenant, "Tenant has not paid yet");
@@ -75,7 +75,7 @@ contract RentAgreement {
         uint256 timeElapsed = block.timestamp - agreement.startTime;
         uint256 intervalsPassed = timeElapsed / agreement.interval;
         
-        // Calculate how much SHOULD have been paid by now
+        // Calculate how much should have been paid by now
         uint256 amountDue = intervalsPassed * agreement.rentPerInterval;
         
         // Calculate how much is remaining to be paid to landlord
