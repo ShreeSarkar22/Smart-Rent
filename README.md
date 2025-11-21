@@ -6,10 +6,10 @@ A Decentralized Application (DApp) that automates rental agreements and payments
 
 ## Group 1
 
+- Shree Suswaagatam Sarkar , 2023A3PS0345H
 - Pranshu Suman , 2023A7PS1107H
 - Aarush Kanipakam , 2023A7PS1160H
 - Himnish Lalchandani , 2023AAPS1131H
-- Shree Suswaagatam Sarkar , 2023A3PS0345H
 - Divyajot Singh , 2023AAPS0253H
 
 ---
