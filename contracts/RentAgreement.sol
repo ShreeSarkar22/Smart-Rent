@@ -71,11 +71,9 @@ contract RentAgreement {
         uint256 totalContractValue = (agreement.duration / agreement.interval) * agreement.rentPerInterval;
         uint256 amountDue;
 
-        // FIX: If duration is over, the AMOUNT DUE is the TOTAL CONTRACT VALUE.
         if (block.timestamp >= agreement.startTime + agreement.duration) {
             amountDue = totalContractValue;
         } else {
-            // Normal calculation
             uint256 timeElapsed = block.timestamp - agreement.startTime;
             uint256 intervalsPassed = timeElapsed / agreement.interval;
             amountDue = intervalsPassed * agreement.rentPerInterval;

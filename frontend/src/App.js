@@ -23,7 +23,7 @@ function App() {
   // Contract Data
   const [agreementDetails, setAgreementDetails] = useState(null);
   
-  // Stats State (No Timer)
+  // Stats State
   const [financials, setFinancials] = useState({ paid: "0", left: "0", total: "0" });
   const [isOver, setIsOver] = useState(false);
 
@@ -89,7 +89,6 @@ function App() {
     const dur = Number(agreementDetails.duration);
     const intvl = Number(agreementDetails.interval);
     
-    // Financial Calcs
     const rentPer = ethers.formatEther(agreementDetails.rentPerInterval);
     const totalPaidWei = ethers.formatEther(agreementDetails.totalRentPaid);
     
@@ -103,7 +102,7 @@ function App() {
       left: Math.max(0, leftEth).toFixed(4)
     });
 
-    // Check if fully paid out (floating point safe check)
+    // Check if fully paid out
     if (Number(leftEth) <= 0.0001) {
       setIsOver(true);
     } else {
@@ -178,7 +177,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Blockchain Rent Dashboard</h1>
+      <h1>Smart Rent Dashboard</h1>
       <p className="sub-text">Connected: {account.slice(0,6)}...{account.slice(-4)}</p>
       {isLandlord && <span className="landlord-badge">LANDLORD</span>}
 
@@ -227,7 +226,7 @@ function App() {
             )}
 
             {/* Release Button: Always visible if money is left. 
-                If clicked too early, the contract throws an error which we catch. */}
+                If clicked too early, the contract throws an error */}
             {agreementDetails.fullyPaidByTenant && !isOver && (
                 <button className="release-btn" onClick={manualTriggerRelease}>
                     Check & Release Rent
