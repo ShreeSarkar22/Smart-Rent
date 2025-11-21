@@ -12,6 +12,8 @@ A Decentralized Application (DApp) that automates rental agreements and payments
 - Shree Suswaagatam Sarkar , 2023A3PS0345H
 - Divyajot Singh , 2023AAPS0253H
 
+---
+
 ##  Features
 
 - **Smart Agreement Creation:** Landlords can create digital lease agreements backed by PDF documents stored on IPFS (via Pinata).
@@ -54,8 +56,8 @@ Before running the project, ensure you have the following installed:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/smart-rent.git
-cd smart-rent
+git clone https://github.com/ShreeSarkar22/Smart-Rent
+cd Smart Rent
 ```
 
 ### 2. Install Root Dependencies (Hardhat)
@@ -75,6 +77,7 @@ Create a `.env` file inside the `frontend` folder:
 FILE: `frontend/.env`
 ```bash
 REACT_APP_PINATA_JWT=your_long_pinata_jwt_token_here
+REACT_APP_CONTRACT_ADDRESS=deployed_contract_address_here
 ```
 
 ---
@@ -101,8 +104,8 @@ npx hardhat run scripts/deploy.js --network localhost
 ### IMPORTANT : 
 - The terminal will output a Contract Address
 - Copy this address.
-- Open `frontend/src/App.js`
-- Update the `contractAddress` variable with the new address.
+- Open `.env`
+- Update the `REACT_APP_CONTRACT_ADDRESS` variable with the new address.
 ---
 ### Terminal 3: Start Front End
 ```bash
